@@ -1,0 +1,25 @@
+{
+  "name": "GCP Cloud Functions Environment with pnpm",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": ".."
+  },
+  "settings": {
+    "terminal.integrated.defaultProfile.linux": "bash"
+  },
+  "extensions": [
+    "esbenp.prettier-vscode",
+    "dbaeumer.vscode-eslint",
+    "firebase.vscode-firebase",
+    "ms-vscode.vscode-typescript-next"
+  ],
+  "postCreateCommand": "gcloud components install beta && gcloud components update",
+  "remoteUser": "node",
+  "workspaceFolder": "/workspace",
+  "forwardPorts": [8080],
+  "remoteEnv": {
+    "LOCAL_UID": "${localEnv:UID}",
+    "LOCAL_GID": "${localEnv:GID}"
+  },
+  "mounts": ["source=${localWorkspaceFolder},target=/workspace,type=bind"]
+}
