@@ -1,5 +1,5 @@
 import * as functions from "firebase-functions";
-import vision from "@google-cloud/Vision";
+import vision from "@google-cloud/vision";
 
 // Vision AI クライアントの作成
 const client = new vision.ImageAnnotatorClient();

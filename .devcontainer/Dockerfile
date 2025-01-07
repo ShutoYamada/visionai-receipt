@@ -33,7 +33,7 @@ RUN npm install -g firebase-tools
 WORKDIR /workspace
 
 # 必要なファイルをコピー
-COPY package.json .
+COPY functions/package.json .
 
 # 初回ビルド時にロックファイルを生成
 RUN pnpm install
