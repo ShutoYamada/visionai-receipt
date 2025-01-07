@@ -11,7 +11,6 @@ RUN groupmod -g ${LOCAL_GID} node && \
 RUN apt-get update && apt-get install -y \
     python3 \
     python3-pip \
-    unzip \
     curl \
     && rm -rf /var/lib/apt/lists/*
 
@@ -26,16 +25,11 @@ RUN curl -sSL https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-
 # gcloudをパスに追加
 ENV PATH="/google-cloud-sdk/bin:${PATH}"
 
-# Firebase CLIのインストール
-RUN npm install -g firebase-tools
-
 # 作業ディレクトリを設定
 WORKDIR /workspace
 
-# 必要なファイルをコピー
-COPY functions/package.json .
-
 # 初回ビルド時にロックファイルを生成
+COPY package.json pnpm-lock.yaml ./
 RUN pnpm install
 
 # 必要な拡張機能
@@ -43,6 +37,3 @@ RUN npm install -g typescript
 
 # 作業ディレクトリのルート設定
 WORKDIR /workspace
-
-# コンテナ内でCloud Functionsのエミュレータを実行できるようにする
-EXPOSE 8080

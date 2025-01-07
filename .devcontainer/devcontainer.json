@@ -1,5 +1,5 @@
 {
-  "name": "GCP Cloud Functions Environment with pnpm",
+  "name": "GCP Cloud Run Environment with pnpm",
   "build": {
     "dockerfile": "Dockerfile",
     "context": ".."
@@ -9,9 +9,7 @@
   },
   "extensions": [
     "esbenp.prettier-vscode",
-    "dbaeumer.vscode-eslint",
-    "firebase.vscode-firebase",
-    "ms-vscode.vscode-typescript-next"
+    "dbaeumer.vscode-eslint"
   ],
   "postCreateCommand": "gcloud components install beta && gcloud components update",
   "remoteUser": "node",

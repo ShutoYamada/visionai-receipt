@@ -1,0 +1,29 @@
+{
+  "name": "vision-api-cloud-run",
+  "version": "1.0.0",
+  "description": "A GCP Cloud Run project for Vision API testing",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
+    "lint": "eslint 'src/**/*.{js,ts}'"
+  },
+  "dependencies": {
+    "@google-cloud/vision": "^4.3.2",
+    "express": "^4.21.2",
+    "express-async-handler": "^1.2.0"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.0",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "eslint": "^8.50.0",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.2.0"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "type": "module"
+}
