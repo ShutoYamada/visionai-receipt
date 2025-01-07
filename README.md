@@ -44,10 +44,11 @@ https://xxxxxxx
 
 ### 2. Vision AI API の有効化
 
-Vision AI を有効化する。
+Vision AI(とその他必要なもの) を有効化する。
 
 ```shell
 gcloud services enable vision.googleapis.com
+gcloud services enable artifactregistry.googleapis.com --project <PROJECT_ID>
 ```
 
 現在有効なサービス一覧を確認したい場合は以下を実行。
@@ -80,12 +81,10 @@ pnpm install
 
 ## Cloud Run へのデプロイ
 
-### 1. Docker イメージのビルドとアップロード
-
-Docker イメージをビルドして Google Container Registry にアップロード。
+### 1. ビルド
 
 ```shell
-gcloud builds submit --tag gcr.io/<PROJECT_ID>/vision-api-app
+pnpm build
 ```
 
 ### 2.Cloud Run へのデプロイ
@@ -94,9 +93,9 @@ Cloud Run へデプロイ。
 
 ```shell
 gcloud run deploy vision-api-app \
-  --image gcr.io/<PROJECT_ID>/vision-api-app \
-  --platform managed \
-  --region REGION \
+  --source . \
+  --project <PROJECT_ID> \
+  --region asia-northeast1-a \
   --allow-unauthenticated
 ```
 
@@ -155,6 +154,7 @@ curl -X POST https://YOUR_CLOUD_RUN_URL/analyze-receipt \
 ├── .eslintrc.js
 ├── package.json
 ├── tsconfig.json
-└── devcontainer/
-    └── Dockerfile
+└── .devcontainer/
+    ├── Dockerfile
+    └── devcontainer.json
 ```
