@@ -26,6 +26,12 @@ GCP の Vision AI を用いたサンプルコード。
 
 ### 1. GCP との連携
 
+GCP のプロジェクト ID を設定しておく。
+
+```shell
+export PROJECT_ID=<自分のGCPプロジェクトID>
+```
+
 以下を実行し、GCP プロジェクトを設定。
 
 ```shell
@@ -48,7 +54,9 @@ Vision AI(とその他必要なもの) を有効化する。
 
 ```shell
 gcloud services enable vision.googleapis.com
-gcloud services enable artifactregistry.googleapis.com --project <PROJECT_ID>
+gcloud services enable artifactregistry.googleapis.com --project $PROJECT_ID
+gcloud services enable run.googleapis.com --project $PROJECT_ID
+gcloud services enable cloudbuild.googleapis.com --project $PROJECT_ID
 ```
 
 現在有効なサービス一覧を確認したい場合は以下を実行。
@@ -94,7 +102,7 @@ Cloud Run へデプロイ。
 ```shell
 gcloud run deploy vision-api-app \
   --source . \
-  --project <PROJECT_ID> \
+  --project $PROJECT_ID \
   --region asia-northeast1-a \
   --allow-unauthenticated
 ```
@@ -102,6 +110,7 @@ gcloud run deploy vision-api-app \
 ## テスト実行
 
 Cloud Run のエンドポイントがデプロイされたら、以下のようにテスト実行を行う。
+※一時的に CloudRun の「セキュリティ」から「認証」を「未認証の呼び出しを許可」に変更する必要あり。
 
 テストデータの送信。
 
